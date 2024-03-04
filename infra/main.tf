@@ -11,9 +11,21 @@ provider "aws" {
   }
 }
 
+# SQS Dead Letter Queue (DLQ)
+resource "aws_sqs_queue" "process_queue_dlq" {
+  name = "dlq"
+}
+
+
 # SQS Queue
 resource "aws_sqs_queue" "process_queue" {
   name = "process_queue"
+
+   # Configure Redrive Policy to send messages to the DLQ after 3 failed attempts
+  redrive_policy = jsonencode({
+    deadLetterTargetArn    = aws_sqs_queue.process_queue_dlq.arn
+    maxReceiveCount        = 3
+  })
 }
 
 # Lambda Function
