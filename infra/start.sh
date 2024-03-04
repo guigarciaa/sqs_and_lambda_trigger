@@ -1,20 +1,22 @@
-# docker-compose -f localstack/localstack.yml up -d;
 
 
 # echo "Starting the application"
 
-# zip -r ./lambda_process.zip ../app/src/*.py
+# docker-compose -f localstack/localstack.yml up -d
+
+# # zip -r ./lambda_process.zip ../app/src/*.py
 
 # tflocal init
 # tflocal apply -auto-approve
 
 # echo "Application started"
 
-echo "Sending a message to the queue"
+echo "Sending messages to the queue"
 
-awslocal sqs send-message --queue-url http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/process_queue --message-body "Hello World"
+for i in {1..100000}; do
+    awslocal sqs send-message --queue-url http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/process_queue --message-body "{ 'eventType': 'teste', 'data': 'teste' }"
+done
 
-awslocal sqs send-message --queue-url http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/terraform-example-queue.fifo --message-body "Hello World"
 
 # echo "Starting the tests"
 
