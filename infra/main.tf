@@ -17,7 +17,7 @@ resource "aws_sqs_queue" "process_queue" {
 }
 
 # Lambda Function
-resource "aws_lambda_function" "lambda_process" {
+resource "aws_lambda_function" "lambda_core" {
   filename      = "lambda_process.zip"
   function_name = "lambda_process"
   role          = aws_iam_role.lambda_role.arn
@@ -28,7 +28,7 @@ resource "aws_lambda_function" "lambda_process" {
 # Lambda SQS Queue Trigger
 resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   event_source_arn = aws_sqs_queue.process_queue.arn
-  function_name    = aws_lambda_function.lambda_process.function_name
+  function_name    = aws_lambda_function.lambda_core.function_name
   batch_size       = 10
 }
 
