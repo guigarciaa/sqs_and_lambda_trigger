@@ -1,5 +1,7 @@
 # Sample Project - Using SQS with Lambda and RDS
-This project is a sample project that demonstrates how to use AWS services suchjson as SQS, Lambda, and RDS. The project is a simple application that receives a message from an SQS queue, processes the message using a Lambda function, and then stores the message in an RDS database.
+This project is a sample project that demonstrates how to use AWS services suchjson as SQS, Lambda, and RDS. 
+
+The project is a simple application that receives a message from an SQS queue, processes the message using a Lambda function, and then stores the message in an RDS database.
 
 ## Overview
 <p align="center" width="100%">
@@ -7,8 +9,15 @@ This project is a sample project that demonstrates how to use AWS services suchj
 </p>
 
 ## Prerequisites
-- AWS CLI
 - Docker
+- Python 3.8
+- Pip
+
+```bash
+pip install awscli-local &&
+
+pip install tflocal
+```
 
 ## Setup
 1. Clone the repository
