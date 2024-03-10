@@ -2,14 +2,16 @@
 
 # echo "Starting the application"
 
+# export AWS_ENDPOINT_URL=http://localhost:4566
 # docker-compose -f localstack/localstack.yml up -d
 
-# # zip -r ./lambda_process.zip ../app/src/*.py
 
+# zip -r lambda_process.zip ../app/src/*
 # tflocal init
-# tflocal apply -auto-approve
+tflocal apply -auto-approve
 
 # echo "Application started"
+
 
 echo "Sending messages to the queue"
 
